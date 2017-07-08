@@ -12,4 +12,4 @@ def download(url,num_retries=2):
                 return download(url,num_retries-1)
     return html
 
-download("http://baidu.com")
+download("http://httpstat.us/500")
