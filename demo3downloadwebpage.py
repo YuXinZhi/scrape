@@ -20,7 +20,7 @@ def crawl_sitemap(url):
     #dwonload the sitemap file
     sitemap = download(url)
     #extract the sitemap links
-    links = re.findall('<loc>(.*?)<loc>',sitemap)
+    links = re.findall('<loc>(.*?)</loc>',sitemap)
     #downlod each lin
     for link in links:
         html = download(link)
