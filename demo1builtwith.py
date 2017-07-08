@@ -1,6 +1,6 @@
 import builtwith
 import chardet
 
-s=builtwith.parse("http://google.com")
+s=builtwith.parse("http://baidu.com")
 
 print(s)
