@@ -25,7 +25,7 @@ def crawl_sitemap(url):
     for link in links:
         html = download(link)
 
-crawl_sitemap("http://example.webscraping.com/sitemap.xml")
+crawl_sitemap("http://localhost:8080/pydemo/sitemap.xml")
 
 
 #download("http://baidu.com")
