@@ -1,9 +1,9 @@
 import re
-import urlparse
-import urllib2
+import urllib.parse
+import urllib
 import time
 import datetime
-import robotparser
+import urllib.robotparser
 from downloader import Downloader
 
 
@@ -25,6 +25,7 @@ def link_crawler(seed_url, link_regex=None, delay=5, max_depth=-1, max_urls=-1, 
         # check url passes robots.txt restrictions
         if rp.can_fetch(user_agent, url):
             html = D(url)
+            html = html.decode('utf-8')
             links = []
             if scrape_callback:
                 links.extend(scrape_callback(url, html) or [])
@@ -50,28 +51,28 @@ def link_crawler(seed_url, link_regex=None, delay=5, max_depth=-1, max_urls=-1, 
             if num_urls == max_urls:
                 break
         else:
-            print 'Blocked by robots.txt:', url
+            print('Blocked by robots.txt:', url)
 
 
 
 def normalize(seed_url, link):
     """Normalize this URL by removing hash and adding domain
     """
-    link, _ = urlparse.urldefrag(link) # remove hash to avoid duplicates
-    return urlparse.urljoin(seed_url, link)
+    link, _ = urllib.parse.urldefrag(link) # remove hash to avoid duplicates
+    return urllib.parse.urljoin(seed_url, link)
 
 
 def same_domain(url1, url2):
     """Return True if both URL's belong to same domain
     """
-    return urlparse.urlparse(url1).netloc == urlparse.urlparse(url2).netloc
+    return urllib.parse.urlparse(url1).netloc == urllib.parse.urlparse(url2).netloc
 
 
 def get_robots(url):
     """Initialize robots parser for this domain
     """
-    rp = robotparser.RobotFileParser()
-    rp.set_url(urlparse.urljoin(url, '/robots.txt'))
+    rp = urllib.robotparser.RobotFileParser()
+    rp.set_url(urllib.parse.urljoin(url, '/robots.txt'))
     rp.read()
     return rp
         
