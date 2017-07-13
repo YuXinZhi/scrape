@@ -125,7 +125,7 @@ def get_links(html):
     '''return a list of links from html
     '''
     #a regular expression to extract all links the webpage
-    webpage_regex = re.compile('<a<^>>+href=["\'](.*?)["\']',re.IGNORECASE)
+    webpage_regex = re.compile('<a[^>]+href=["\'](.*?)["\']',re.IGNORECASE)
     #list of all links from the webpage
     return webpage_regex.findall(html)
 
